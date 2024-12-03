@@ -11,5 +11,10 @@ supabase: Client = create_client(url,key)
 
 @app.get("/image")
 async def get_image():
-    image = supabase.table("Patient_image_data")
-    return{"msg":"Hello World"}
+    image = supabase.table("Patient_Bio_Data").select("*").execute()
+    return image
+
+@app.get("/image/{id}")
+async def get_image(id:int):
+    image = supabase.table("Patient_Bio_Data").select("*").eq("Patient_ID",id).execute()
+    return image
