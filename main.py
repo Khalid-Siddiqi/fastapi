@@ -64,11 +64,11 @@ async def upload_image(data: PatientImageData):
         today_date = int(datetime.now().strftime("%Y%m%d"))
 
         # Count how many images have been uploaded today by this patient
-        response_count = supabase.table("patient_image_data").select("*").eq("Patient_ID", data.Patient_ID).eq("Date", today_date).execute()
+        response_count = supabase.table("Patient_Image_Data").select("*").eq("Patient_ID", data.Patient_ID).eq("Date", today_date).execute()
         daily_image_count = len(response_count.data) + 1
 
         # Insert new record into the database
-        response_insert = supabase.table("patient_image_data").insert({
+        response_insert = supabase.table("Patient_Image_Data").insert({
             "Patient_ID": data.Patient_ID,
             "Image": data.Image,
             "Category": data.Category,
